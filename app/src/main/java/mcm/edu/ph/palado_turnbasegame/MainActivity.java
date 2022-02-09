@@ -18,14 +18,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton skill1;
 
     //Hero Stats
-    String heroName = "Daddy";
+    String heroName = "sasuke";
     int heroHP = 1500;
     int heroMP = 1000;
     int heroMinDamage = 100;
     int heroMaxDamage = 150;
 
     //Monster Stats
-    String monsName = "Mommy";
+    String monsName = "naruto";
     int monsterHP = 3000;
     int monsterMP = 400;
     int monsterMinDamage = 40;

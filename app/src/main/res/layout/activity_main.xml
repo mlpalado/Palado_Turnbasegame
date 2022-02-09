@@ -28,30 +28,11 @@
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.17" /><![CDATA[
 
-    <TextView
-        android:id="@+id/txtHeroName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Character"
-        app:layout_constraintBottom_toTopOf="@+id/txtHeroDPS"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.352"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.353" />
 
-    <TextView
-        android:id="@+id/txtMonsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
-        android:layout_marginEnd="20dp"
-        android:text="Monster Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" /><![CDATA[
+
+
 
     "
         tools:layout_editor_absoluteX="24dp"
@@ -62,27 +43,59 @@
 
 
 
+
+
+
+
+
+
+
+
     ]]>
+
+    <TextView
+        android:id="@+id/txtHeroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Character"
+        app:layout_constraintBottom_toTopOf="@+id/txtHeroDPS"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.408" />
+
+    <TextView
+        android:id="@+id/txtMonsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="20dp"
+        android:text="Monster Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.702"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtHeroDPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="68dp"
         android:text="Hero Damage"
         app:layout_constraintEnd_toEndOf="@+id/txtHeroName"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/txtHeroName"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/txtMonsDPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:text="Monster Damage"
         app:layout_constraintEnd_toEndOf="@+id/txtMonsName"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/txtMonsName"
         app:layout_constraintTop_toBottomOf="@+id/txtMonsName" />
 
@@ -93,7 +106,7 @@
         android:layout_marginTop="28dp"
         android:text="Character HP"
         app:layout_constraintEnd_toEndOf="@+id/txtHeroDPS"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtHeroDPS"
         app:layout_constraintTop_toBottomOf="@+id/txtHeroDPS" />
 
@@ -108,7 +121,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtHeroHP"
         app:layout_constraintTop_toBottomOf="@+id/txtHeroHP"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintVertical_bias="0.716" />
 
     <TextView
         android:id="@+id/txtMonsHP"
@@ -135,27 +148,27 @@
         app:layout_constraintVertical_bias="0.032" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="197dp"
-        android:layout_height="137dp"
+        android:id="@+id/imageView3"
+        android:layout_width="153dp"
+        android:layout_height="103dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.972"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
-        app:srcCompat="@drawable/asdd" />
+        app:layout_constraintVertical_bias="0.146"
+        app:srcCompat="@drawable/naruto" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="169dp"
-        android:layout_height="144dp"
+        android:id="@+id/imageView4"
+        android:layout_width="147dp"
+        android:layout_height="109dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
-        app:srcCompat="@drawable/dsa" />
+        app:layout_constraintVertical_bias="0.129"
+        app:srcCompat="@drawable/sasuke" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
