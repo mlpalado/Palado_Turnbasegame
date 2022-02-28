@@ -41,9 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int turnNumber = 1;
     int buttoncounter = 2;
 
+    int prevdmgdealthero = 0;
+    int prevdmgdealtenemy = 0;
+    int burndamage = 50;
     int buttoncd = 0;
     int burncounter =0;
     boolean burnstatus = false;
+    boolean disabledstatus = false;
     int statuscounter = 0;
     int victory = 1;
     int defeat = 0;
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNextTurn = findViewById(R.id.btnNxtTurn);
         txtHeroDPS = findViewById(R.id.txtHeroDPS);
         txtMonsDPS = findViewById(R.id.txtMonsDPS);
+        skill1 = findViewById(R.id.skill1);
 
         txtLog = findViewById(R.id.txtCombatLog);
 
@@ -82,51 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //button onClick Listener
         btnNextTurn.setOnClickListener(this);
+        skill1.setOnClickListener(this);
     }
 
-
-    switch (v.getId()) {
-    case R.id.skill1:
-
-    monsterHP = Math.max(0, monsterHP - 150);
-    turnNumber++;
-                txtMonsHP.setText(String.valueOf(monsterHP));
-
-                txtLog.setText("" + String.valueOf(txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
-                btnNextTurn.setText("Your Turn (" + String.valueOf(turnNumber)+ ")");
-
-    burnstatus = true;
-    burncounter = 4;
-
-                if (monsterHP == 0) {
-        txtLog.setText("" + String.valueOf(txtHeroName) + " killed " + String.valueOf(txtMonsName) + "! You win.");
-        heroHP = 2000;
-        monsterHP = 5000;
-        turnNumber = 1;
-        btnNextTurn.setText("Next Game");
-
-    }
-    buttoncd = 12;
-                break;
-
-    //public void press() {
-        
-        //skill1.setOnTouchListener(new View.OnTouchListener(){
-            
-            //@SuppressLint("ClickableViewAccessibility")
-            //public boolean onTouch(View v, MotionEvent event) {
-               // if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //skill1.setImageAlpha(25);
-                   // Log.d(TAG, "skill1 pressd");
-                //} else if (event.getAction() == MotionEvent.ACTION_UP) {
-                   // skill1.setImageAlpha(255);
-                   // Log.d(TAG, "skill1 unpressd");
-                //}
-                //return false;
-           // }
-       // });
-
-    }
     @Override
     public void onClick(View v) {
 
@@ -142,11 +105,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         switch(v.getId()) {
+            case R.id.skill1:
+
+                monsterHP = Math.max(0, monsterHP - 150);
+                turnNumber++;
+                txtMonsHP.setText(String.valueOf(monsterHP));
+
+                txtLog.setText("" + String.valueOf(txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
+                btnNextTurn.setText("Your Turn (" + String.valueOf(turnNumber)+ ")");
+
+                burnstatus = true;
+                burncounter = 4;
+
+                if (monsterHP == 0) {
+                    txtLog.setText("" + String.valueOf(txtHeroName) + " killed " + String.valueOf(txtMonsName) + "! You win.");
+                    heroHP = 2000;
+                    monsterHP = 5000;
+                    turnNumber = 1;
+                    btnNextTurn.setText("Next Game");
+
+                }
+                buttoncd = 12;
+                break;
+
             case R.id.btnNxtTurn:
                 //
 
                 if(turnNumber % 2 == 1){ //odd
                     monsterHP = monsterHP - herodps;
+                    prevdmgdealthero = herodps;
                     turnNumber++;
                     txtMonsHP.setText(String.valueOf(monsterHP));
                     btnNextTurn.setText("Next Turn ("+ String.valueOf(turnNumber)+")");
@@ -161,22 +148,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         buttoncounter=0;
                         btnNextTurn.setText("Reset Game");
                     }
+                    if (burncounter > 0) {
+                        //if the enemy is still burned, reduce 30 per turn
+                        monsterHP = (monsterHP - burndamage);
+                        txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) + "! The enemy is still burned! It dealt 50 damage.");
+                        burncounter--;
 
+                        if (burncounter == 0) {
+                            burnstatus = false;
+                            txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) +"! The enemy is no longer burned.");
+                        }
+                    }
+
+                    buttoncd--;
+                    buttoncd--;
                     buttoncounter--;
                 }
                 else if(turnNumber%2 != 1){ //even
-
-                    if(disabledstatus==true){
-                        txtLog.setText("The enemy is still stunned for "+String.valueOf(statuscounter)+ "turns");
-                        statuscounter--;
-                        turnNumber++;
-                        btnNextTurn.setText("Next Turn ("+ String.valueOf(turnNumber)+")");
-                        if(statuscounter==0){
-                            disabledstatus=false;
-                        }
-                    }
-                    else{
                         heroHP = heroHP - monsdps;
+                        prevdmgdealtenemy = monsdps;
                         turnNumber++;
                         txtHeroHP.setText(String.valueOf(heroHP));
                         btnNextTurn.setText("Next Turn ("+ String.valueOf(turnNumber)+")");
@@ -192,11 +182,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             btnNextTurn.setText("Reset Game");
                         }
                     }
-
-                }
                 break;
+                }
         }
-    }
+
     private void enableFullscreen() {
         View decorView = getWindow().getDecorView();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
