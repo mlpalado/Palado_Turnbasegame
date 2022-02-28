@@ -1,20 +1,13 @@
 package mcm.edu.ph.palado_turnbasegame;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.google.firebase.database.core.Tag;
 
 import java.util.Random;
 
@@ -45,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int prevdmgdealtenemy = 0;
     int burndamage = 50;
     int buttoncd = 0;
-    int burncounter =0;
-    boolean burnstatus = false;
+    int electricounter =0;
+    boolean electricstatus = false;
     boolean disabledstatus = false;
     int statuscounter = 0;
     int victory = 1;
@@ -111,14 +104,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 turnNumber++;
                 txtMonsHP.setText(String.valueOf(monsterHP));
 
-                txtLog.setText("" + String.valueOf(R.id.txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
+                txtLog.setText("" + String.valueOf(heroName) + " used Chidori! It dealt " + String.valueOf(150) + "! The enemy is Electrocuted for 5 turns.");
                 btnNextTurn.setText("Your Turn (" + String.valueOf(turnNumber)+ ")");
 
-                burnstatus = true;
-                burncounter = 4;
+                electricstatus = true;
+                electricounter = 4;
 
                 if (monsterHP == 0) {
-                    txtLog.setText("" + String.valueOf(txtHeroName) + " killed " + String.valueOf(txtMonsName) + "! You win.");
+                    txtLog.setText("" + String.valueOf(heroName) + " killed " + String.valueOf(monsName) + "! You win.");
                     heroHP = 2000;
                     monsterHP = 5000;
                     turnNumber = 1;
@@ -148,15 +141,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         buttoncounter=0;
                         btnNextTurn.setText("Reset Game");
                     }
-                    if (burncounter > 0) {
+                    if (electricounter > 0) {
                         //if the enemy is still burned, reduce 30 per turn
                         monsterHP = (monsterHP - burndamage);
-                        txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) + "! The enemy is still burned! It dealt 50 damage.");
-                        burncounter--;
+                        txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) + "! The enemy is still Electrocuted! It dealt 50 damage.");
+                        electricounter--;
 
-                        if (burncounter == 0) {
-                            burnstatus = false;
-                            txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) +"! The enemy is no longer burned.");
+                        if (electricounter == 0) {
+                            electricstatus = false;
+                            txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) +"! The enemy is no longer Electrocuted.");
                         }
                     }
                     buttoncd--;
