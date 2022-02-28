@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 turnNumber++;
                 txtMonsHP.setText(String.valueOf(monsterHP));
 
-                txtLog.setText("" + String.valueOf(txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
+                txtLog.setText("" + String.valueOf(R.id.txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
                 btnNextTurn.setText("Your Turn (" + String.valueOf(turnNumber)+ ")");
 
                 burnstatus = true;
@@ -159,8 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             txtLog.setText("" + String.valueOf(heroName) + " dealt " + String.valueOf(prevdmgdealthero) + " to " + String.valueOf(monsName) +"! The enemy is no longer burned.");
                         }
                     }
-
-                    buttoncd--;
                     buttoncd--;
                     buttoncounter--;
                 }
