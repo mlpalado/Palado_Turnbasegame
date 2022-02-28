@@ -1,17 +1,24 @@
 package mcm.edu.ph.palado_turnbasegame;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.core.Tag;
+
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView txtHeroName, txtMonsName, txtHeroHP, txtMonsHP, txtHeroMP, txtMonsMP, txtHeroDPS, txtMonsDPS, txtLog;
     Button btnNextTurn;
@@ -34,11 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int turnNumber = 1;
     int buttoncounter = 2;
 
-    boolean disabledstatus = false;
+    int buttoncd = 0;
+    int burncounter =0;
+    boolean burnstatus = false;
     int statuscounter = 0;
-
-
-
+    int victory = 1;
+    int defeat = 0;
 
 
     @Override
@@ -68,15 +76,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtMonsHP.setText(String.valueOf(monsterHP));
         txtMonsMP.setText(String.valueOf(monsterMP));
 
-        txtHeroDPS.setText(String.valueOf(heroMinDamage)+ " ~ "+ String.valueOf(heroMaxDamage));
-        txtMonsDPS.setText(String.valueOf(monsterMinDamage)+ " ~ "+ String.valueOf(monsterMaxDamage));
-
-
-
+        txtHeroDPS.setText(String.valueOf(heroMinDamage) + " ~ " + String.valueOf(heroMaxDamage));
+        txtMonsDPS.setText(String.valueOf(monsterMinDamage) + " ~ " + String.valueOf(monsterMaxDamage));
 
 
         //button onClick Listener
         btnNextTurn.setOnClickListener(this);
+    }
+
+
+    switch (v.getId()) {
+    case R.id.skill1:
+
+    monsterHP = Math.max(0, monsterHP - 150);
+    turnNumber++;
+                txtMonsHP.setText(String.valueOf(monsterHP));
+
+                txtLog.setText("" + String.valueOf(txtHeroName) + " used Burn! It dealt " + String.valueOf(150) + "! The enemy is burned for 5 turns.");
+                btnNextTurn.setText("Your Turn (" + String.valueOf(turnNumber)+ ")");
+
+    burnstatus = true;
+    burncounter = 4;
+
+                if (monsterHP == 0) {
+        txtLog.setText("" + String.valueOf(txtHeroName) + " killed " + String.valueOf(txtMonsName) + "! You win.");
+        heroHP = 2000;
+        monsterHP = 5000;
+        turnNumber = 1;
+        btnNextTurn.setText("Next Game");
+
+    }
+    buttoncd = 12;
+                break;
+
+    //public void press() {
+        
+        //skill1.setOnTouchListener(new View.OnTouchListener(){
+            
+            //@SuppressLint("ClickableViewAccessibility")
+            //public boolean onTouch(View v, MotionEvent event) {
+               // if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //skill1.setImageAlpha(25);
+                   // Log.d(TAG, "skill1 pressd");
+                //} else if (event.getAction() == MotionEvent.ACTION_UP) {
+                   // skill1.setImageAlpha(255);
+                   // Log.d(TAG, "skill1 unpressd");
+                //}
+                //return false;
+           // }
+       // });
+
     }
     @Override
     public void onClick(View v) {
